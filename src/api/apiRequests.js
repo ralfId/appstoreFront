@@ -130,3 +130,27 @@ export const createNewCommentToAppApi = async (comment) => {
     }
 
 }
+
+
+
+export const InstalledAppApi = async (appId) => {
+
+    
+    try {
+        console.log(appId)
+        const app = await appStoreApi.post(`apps/installApp/${appId}`);
+
+        if (app.status === 200) {
+            return app.data;
+        } else {
+            return {
+                data: null
+            }
+        }
+    } catch (error) {
+        return {
+            data: null
+        }
+    }
+
+}

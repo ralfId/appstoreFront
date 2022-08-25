@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForms } from '../../hooks/useForm';
-import { deleteApp } from '../../store/applications/appsThunks';
+import { deleteApp, IntallApp } from '../../store/applications/appsThunks';
 import { createNewCommentToApp, getCommentPerApp } from '../../store/comments/commentThunks';
 import { closeModal, openModal } from '../../store/ui/uiThunks';
 import { RatingLayout } from '../layout/RatingLayout';
@@ -33,7 +33,7 @@ export const CardModal = () => {
     const { isModalOpen } = useSelector(state => state.ui);
     const { selectedApp } = useSelector(state => state.applications);
     const { data: CommentsList } = useSelector(state => state.comments);
-    const { id, name, developer, score, price, categoryId, description, isInstalled } = selectedItem;
+    const { id, name, developer, score, price, categoryId, description, isInstalled, numberInstallations } = selectedItem;
     const initForm = {
         appId: 0,
         userName: "",
@@ -80,9 +80,6 @@ export const CardModal = () => {
 
     const onCreateComment = (ev) => {
         ev.preventDefault();
-
-
-
         formValues.appId = id;
         if (userName === "" || comment === "" || !userName || !comment && appId > 0) {
             alert('Por favor digite su usuario/comentario')
@@ -92,6 +89,10 @@ export const CardModal = () => {
         reset();
     }
 
+    const onInstallApp = (ev) => {
+        ev.preventDefault();
+       dispatch(IntallApp(id))
+    }
     return (
         <>
             <Modal
@@ -112,7 +113,12 @@ export const CardModal = () => {
                             </div>
                             <div className="col-md-8 col-sm-12">
                                 <h2 className="card-title mb-0">{name}</h2>
+                                <div className="d-block">
                                 <span className="card-title">{developer}</span>
+                                <br/>
+                                <quote >Instalaciones {numberInstallations}</quote>
+                                </div>
+                                
                                 <p className="mt-3">{description}</p>
                             </div>
                         </div>
@@ -131,7 +137,7 @@ export const CardModal = () => {
 
                             <div className="form-group">
                                 <label htmlFor="userNameComment">Nombre de usuario</label>
-                                <input type="text" className="form-control" id="userNameComment" placeholder="digite su nomber" required name="userName" value={userName} onChange={handleInputChange} />
+                                <input type="text" className="form-control" id="userNameComment" placeholder="digite su nombre" required name="userName" value={userName} onChange={handleInputChange} />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="commentContent">comentario</label>
@@ -162,7 +168,7 @@ export const CardModal = () => {
                         <div className="">
                             {
                                 (!isInstalled) &&
-                                <button type="button" className="btn btn-success ml-2">Instalar</button>
+                                <button type="button" className="btn btn-success ml-2" onClick={onInstallApp}>Instalar</button>
                             }
                             <button type="button" className="btn btn-secondary ml-2" onClick={onModalClose}>Cerrar</button>
 

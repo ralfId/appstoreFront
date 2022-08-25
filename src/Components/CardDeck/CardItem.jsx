@@ -5,14 +5,14 @@ import { getCommentPerApp } from '../../store/comments/commentThunks';
 import { openModal } from '../../store/ui/uiThunks';
 import { RatingLayout } from '../layout/RatingLayout'
 
-export const CardItem = ({ id, name, developer, score = 3, price, categoryId, description, isInstalled }) => {
+export const CardItem = ({ id, name, developer, score = 3, price, categoryId, description, isInstalled, numberInstallations }) => {
 
     const dispatch = useDispatch();
 
     const selectedItem = () => {
         dispatch(openModal(true));
 
-        const item = { id, name, developer, score, price, categoryId, description, isInstalled }
+        const item = { id, name, developer, score, price, categoryId, description, isInstalled, numberInstallations}
 
         dispatch(SelectedApp(item));
         dispatch(getCommentPerApp(id));
