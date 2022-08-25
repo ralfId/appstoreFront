@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCommentPerApp } from '../../store/comments/commentThunks';
+import { useForms } from '../../hooks/useForm';
+import { deleteApp } from '../../store/applications/appsThunks';
+import { createNewCommentToApp, getCommentPerApp } from '../../store/comments/commentThunks';
 import { closeModal, openModal } from '../../store/ui/uiThunks';
 import { RatingLayout } from '../layout/RatingLayout';
+import Swal from 'sweetalert2'
 
 const customStyles = {
     content: {
@@ -17,7 +20,7 @@ const customStyles = {
         maxHeight: '100vh',
         overflowY: 'auto',
         zIndex: '1',
-        position: 'relative'
+        position: 'relative',
     },
 };
 Modal.setAppElement('#root');
@@ -31,6 +34,13 @@ export const CardModal = () => {
     const { selectedApp } = useSelector(state => state.applications);
     const { data: CommentsList } = useSelector(state => state.comments);
     const { id, name, developer, score, price, categoryId, description, isInstalled } = selectedItem;
+    const initForm = {
+        appId: 0,
+        userName: "",
+        comment: ""
+    }
+    const [formValues, handleInputChange, reset] = useForms(initForm);
+    const { appId, userName, comment } = formValues;
 
     useEffect(() => {
         if (selectedApp) {
@@ -44,13 +54,42 @@ export const CardModal = () => {
 
 
     const onAfterModalOpen = () => {
-    console.log(isInstalled)
-
     }
 
     const onModalClose = () => {
         dispatch(closeModal(false));
 
+    }
+
+    const onDeleteApp = () => {
+        Swal.fire({
+            title: 'Esta seguro de borrar esta app?',
+            showDenyButton: true,
+
+            confirmButtonText: 'Save',
+            denyButtonText: `Don't save`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteApp(id));
+                dispatch(closeModal(false));
+                Swal.fire('Se a Eliminado!', '', 'success')
+            }
+        })
+
+    }
+
+    const onCreateComment = (ev) => {
+        ev.preventDefault();
+
+
+
+        formValues.appId = id;
+        if (userName === "" || comment === "" || !userName || !comment && appId > 0) {
+            alert('Por favor digite su usuario/comentario')
+        }
+
+        dispatch(createNewCommentToApp(formValues));
+        reset();
     }
 
     return (
@@ -87,6 +126,21 @@ export const CardModal = () => {
                     </div>
 
                     <div className="card mt-5 mb-5 px-4 pt-2">
+                        <form className="mb-5" onSubmit={onCreateComment}>
+                            {/* <input type=" number" id="appId"  required name="appId" value={id} hidden/> */}
+
+                            <div className="form-group">
+                                <label htmlFor="userNameComment">Nombre de usuario</label>
+                                <input type="text" className="form-control" id="userNameComment" placeholder="digite su nomber" required name="userName" value={userName} onChange={handleInputChange} />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="commentContent">comentario</label>
+                                <input type="text" className="form-control" id="commentContent" placeholder="Digite su comentario" required name="comment" value={comment} onChange={handleInputChange} />
+                            </div>
+
+                            <button type="submit" className="btn btn-primary">Enviar comentario</button>
+                        </form>
+
                         {
                             (CommentsList !== undefined) &&
                             CommentsList.map((comment) => (
@@ -103,12 +157,16 @@ export const CardModal = () => {
                         }
                     </div>
 
-                    <div className="d-flex justify-content-end">
-                        {
-                            (!isInstalled) &&
-                        <button type="button" className="btn btn-success ml-2">Instalar</button>
-                        }
-                        <button type="button" className="btn btn-secondary" onClick={onModalClose}>Cerrar</button>
+                    <div className="d-flex d-flex align-items-center justify-content-between">
+                        <button type="button" className="btn btn-danger ml-2 justify-content-start" onClick={onDeleteApp}>Eliminar</button>
+                        <div className="">
+                            {
+                                (!isInstalled) &&
+                                <button type="button" className="btn btn-success ml-2">Instalar</button>
+                            }
+                            <button type="button" className="btn btn-secondary ml-2" onClick={onModalClose}>Cerrar</button>
+
+                        </div>
                     </div>
                 </div>
             </Modal>

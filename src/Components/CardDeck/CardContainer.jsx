@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllApps } from '../../store/applications/appsThunks';
+import { getAllApps, getAllAppsByCategory } from '../../store/applications/appsThunks';
 import { CardItem } from './CardItem'
 import { CardModal } from './CardModal';
 
@@ -14,7 +14,7 @@ export const CardContainer = ({ categoryId = 0 }) => {
             dispatch(getAllApps())
         } else {
             //TODO: obtener  las aplicaciones por id categoria
-
+            dispatch(getAllAppsByCategory(categoryId));
         }
     }, [categoryId]);
 

@@ -8,7 +8,6 @@ export const categorySlice = createSlice({
     },
     reducers: {
         setCategories: (state, action) => {
-            //console.log(action. payload)
             state.count = action.payload.count;
             state.data = action.payload.data;
         }

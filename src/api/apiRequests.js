@@ -66,3 +66,67 @@ export const getCommentsPerAppApi = async (id) => {
     }
 
 }
+
+export const getAllAppsByCategoryApi = async (categoryId) => {
+
+    try {
+        const apps = await appStoreApi.get(`apps/byCategory/${categoryId}`);
+
+        if (apps.status === 200) {
+            return apps.data;
+        } else {
+            return {
+                count: 0,
+                data: []
+            }
+        }
+    } catch (error) {
+        return {
+            count: 0,
+            data: []
+        }
+    }
+
+}
+
+export const deleteAppApi = async (appId) => {
+
+    
+    try {
+        const apps = await appStoreApi.delete(`apps/${appId}`);
+
+        if (apps.status === 200) {
+            return apps.data;
+        } else {
+            return {
+                data: null
+            }
+        }
+    } catch (error) {
+        return {
+            data: null
+        }
+    }
+
+}
+
+export const createNewCommentToAppApi = async (comment) => {
+
+    
+    try {
+        const commentApp = await appStoreApi.post(`appComments`, JSON.stringify(comment));
+
+        if (commentApp.status === 200) {
+            return commentApp.data;
+        } else {
+            return {
+                data: null
+            }
+        }
+    } catch (error) {
+        return {
+            data: null
+        }
+    }
+
+}

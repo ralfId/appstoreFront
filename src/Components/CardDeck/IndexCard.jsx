@@ -14,7 +14,8 @@ export const IndexCard = () => {
 
   useEffect(() => {
     dispatch(getCategories())
-  });
+
+  },[dispatch]);
 
   const comboSelected = () => {
     const category = document.querySelector('#listCategories');

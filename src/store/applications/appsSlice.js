@@ -14,8 +14,13 @@ export const appsSlice = createSlice({
         },
         setSelectedApp: (state, action) => {
              state.selectedApp = action.payload
-        }
+        },
+        setDeleteApp: (state, action) => {
+            state.count -= 1;
+            state.data = state.data.filter(app => app.id !== action.payload.data.id);
+            state.selectedApp = null;
+        },
     }
 });
 
-export const { setApplications, setSelectedApp } = appsSlice.actions;
+export const { setApplications, setSelectedApp, setDeleteApp } = appsSlice.actions;
