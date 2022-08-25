@@ -32,24 +32,75 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
 .bg-dark {
-  background-color: #000!important;
+  background-color: #000 !important;
 }
 
 .cardItem:hover {
 
-  background:orange;
+  background: orange;
   color: #fff
 }
 
-.iconSize1{
+/* .iconSize1{
   font-size: 2em !important;
 }
 .iconSize2{
   font-size: 1.3em !important;
+} */
+.dev-Title {
+  font-size: 14px !important;
 }
+
+/* Pantallas Granades */
+/* @media only screen and (max-width: 1400px) {
+  .cardItem {
+    width: 10em;
+    margin-left: 1.2em;
+    margin-bottom: 1em;
+  }
+
+
+} */
+
+/* Pantallas Medianas */
+/* @media only screen and (max-width: 1280px) {
+  .cardItem {
+    width: 14em;
+    margin-left: 2.5em;
+    margin-bottom: 1em;
+  }
+
+
+} */
+
+/* Pantallas Pequeñas */
+/* @media only screen and (max-width: 1024px) {
+  .cardItem {
+    width: 17em;
+    margin-left: 7.5em;
+    margin-bottom: 1em;
+  }
+
+
+} */
+
+/* Pantallas moviles */
+
+
+/* @media only screen and (max-width: 1024px) {
+  .cardItem {
+    width: 12em;
+    margin-left:40%;
+    margin-bottom: 1em;
+  }
+
+
+
+} */

@@ -106,9 +106,9 @@ export const CardModal = () => {
                     <div className="d-flex justify-content-end">
                         {
                             (!isInstalled) &&
-                            <button type="button" className="btn btn-secondary">Cerrar</button>
-                        }
                         <button type="button" className="btn btn-success ml-2">Instalar</button>
+                        }
+                        <button type="button" className="btn btn-secondary" onClick={onModalClose}>Cerrar</button>
                     </div>
                 </div>
             </Modal>

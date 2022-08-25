@@ -23,7 +23,7 @@ export const IndexCard = () => {
 
   return (
     <>
-      <div className="container bg-danger">
+      <div className="container bg-danger mt-3">
         <select className="col-md-12 mb-5" id="listCategories" onChange={comboSelected} style={{ height: "3rem", fontSize: '1.5rem' }} >
         <option key={0}>Todas las categorias</option>
           {

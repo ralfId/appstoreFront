@@ -21,7 +21,7 @@ export const CardContainer = ({ categoryId = 0 }) => {
 
     return (
         <>
-            <div className="row d-flex">
+            <div className="card-container row d-flex ">
                 {
                     (AppsList !== undefined) && AppsList.map(app => (<CardItem key={app.id} {...app} />))
                 }
