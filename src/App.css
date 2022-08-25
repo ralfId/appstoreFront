@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.bg-dark {
+  background-color: #000!important;
+}
+
+.cardItem:hover {
+
+  background:orange;
+  color: #fff
+}
+
+.iconSize1{
+  font-size: 2em !important;
+}
+.iconSize2{
+  font-size: 1.3em !important;
+}

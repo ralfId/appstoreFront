@@ -1,4 +1,5 @@
 import './App.css';
+import { IndexCard } from './Components/CardDeck/IndexCard';
 import { NavBar } from './Components/NavBar';
 
 function App() {
@@ -8,10 +9,7 @@ function App() {
         
         <main role="main" className="container">
         
-        <div className="starter-template">
-            <img src="img/meme.jpg" alt="" srcset=""/>
-            <p className="lead">Éxitos</p>
-        </div>
+        <IndexCard/>
         
         </main>
     </>
