@@ -116,7 +116,7 @@ export const CardModal = () => {
                                 <div className="d-block">
                                 <span className="card-title">{developer}</span>
                                 <br/>
-                                <quote >Instalaciones {numberInstallations}</quote>
+                                <span >Instalaciones {numberInstallations}</span>
                                 </div>
                                 
                                 <p className="mt-3">{description}</p>
