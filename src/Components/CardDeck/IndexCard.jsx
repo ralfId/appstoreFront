@@ -23,9 +23,9 @@ export const IndexCard = () => {
 
   return (
     <>
-      <div className="container bg-danger mt-3">
+      <div className="container mt-3">
         <select className="col-md-12 mb-5" id="listCategories" onChange={comboSelected} style={{ height: "3rem", fontSize: '1.5rem' }} >
-        <option key={0}>Todas las categorias</option>
+        <option key={0}>Categoria</option>
           {
             CategoryList.map(({ id, name }) => (<option key={id}>{name}</option>))
           }

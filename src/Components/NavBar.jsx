@@ -10,11 +10,11 @@ export const NavBar = () => {
             <span className="navbar-toggler-icon"></span>
         </button>
         
-        <div className="collapse navbar-collapse bg-warning" id="navbarsExampleDefault">
+        <div className="collapse navbar-collapse" id="navbarsExampleDefault" style={{marginLeft: '70%'}}>
            
-            <form className="form-inline my-2 my-lg-0 bg-success">
+            <form className="form-inline my-2 my-lg-0 ">
             <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>
-            <button className="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            <button className="btn btn-secondary my-2 my-sm-0 bg-warning" type="submit"><i class="fas fa-search" style={{color: 'black'}}></i></button>
             </form>
         </div>
         </nav>
