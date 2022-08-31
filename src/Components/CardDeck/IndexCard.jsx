@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
-// import { appStoreApi } from "../../api/appStoreApi";
-// import { setCategories } from "../../store/category/categorySlice";
 import { getCategories } from "../../store/category/categoryThunks";
 import { CardContainer } from "./CardContainer";
+import { CardModal } from "./CardModal";
 
 
 export const IndexCard = () => {
@@ -34,6 +33,9 @@ export const IndexCard = () => {
           <CardContainer categoryId={ categoryID }/>
 
       </div>
+
+      <CardModal/>
+
     </>
   )
 }

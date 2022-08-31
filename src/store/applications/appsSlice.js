@@ -30,7 +30,18 @@ export const appsSlice = createSlice({
             });
             state.selectedApp = null;
         },
+        setRatedApp: (state, action) => {
+            state.data = state.data.map(app => {
+                if (app.id === action.payload.data.id) {
+
+                    return action.payload.data
+                }
+                return app;
+            });
+            state.selectedApp = action.payload.data
+
+        },
     }
 });
 
-export const { setApplications, setSelectedApp, setDeleteApp, setInstalledApp } = appsSlice.actions;
+export const { setApplications, setSelectedApp, setDeleteApp, setInstalledApp, setRatedApp } = appsSlice.actions;

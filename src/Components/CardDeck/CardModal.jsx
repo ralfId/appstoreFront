@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForms } from '../../hooks/useForm';
-import { deleteApp, IntallApp } from '../../store/applications/appsThunks';
-import { createNewCommentToApp, getCommentPerApp } from '../../store/comments/commentThunks';
-import { closeModal, openModal } from '../../store/ui/uiThunks';
+import { deleteApp, IntallApp, SelectedApp } from '../../store/applications/appsThunks';
+import { createNewCommentToApp } from '../../store/comments/commentThunks';
+import { closeModal } from '../../store/ui/uiThunks';
 import { RatingLayout } from '../layout/RatingLayout';
 import Swal from 'sweetalert2'
 
@@ -33,7 +33,7 @@ export const CardModal = () => {
     const { isModalOpen } = useSelector(state => state.ui);
     const { selectedApp } = useSelector(state => state.applications);
     const { data: CommentsList } = useSelector(state => state.comments);
-    const { id, name, developer, score, price, categoryId, description, isInstalled, numberInstallations } = selectedItem;
+    const { id, name, developer, average, price, categoryId, description, isInstalled, numberInstallations } = selectedItem;
     const initForm = {
         appId: 0,
         userName: "",
@@ -58,6 +58,7 @@ export const CardModal = () => {
 
     const onModalClose = () => {
         dispatch(closeModal(false));
+        dispatch(SelectedApp(null));
 
     }
 
@@ -81,7 +82,7 @@ export const CardModal = () => {
     const onCreateComment = (ev) => {
         ev.preventDefault();
         formValues.appId = id;
-        if (userName === "" || comment === "" || !userName || !comment && appId > 0) {
+        if (userName === "" || comment === "" || !userName || (!comment && appId > 0)) {
             alert('Por favor digite su usuario/comentario')
         }
 
@@ -125,9 +126,9 @@ export const CardModal = () => {
                     </div>
 
                     <div className="d-flex justify-content-center align-items-center" >
-                        <RatingLayout />
+                        <RatingLayout  countStarts={average} isReadOnly={false}/>
                         <span style={{ fontSize: "2em", marginLeft: "3%" }}>
-                            {score}
+                            {average}
                         </span>
                     </div>
 

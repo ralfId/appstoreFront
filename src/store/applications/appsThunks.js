@@ -1,5 +1,5 @@
-import { deleteAppApi, getAllAppsApi, getAllAppsByCategoryApi, InstalledAppApi } from "../../api/apiRequests";
-import { setApplications, setDeleteApp, setSelectedApp, setInstalledApp} from "./appsSlice";
+import { deleteAppApi, getAllAppsApi, getAllAppsByCategoryApi, InstalledAppApi, RateAppApi } from "../../api/apiRequests";
+import { setApplications, setDeleteApp, setSelectedApp, setInstalledApp, setRatedApp} from "./appsSlice";
 
 export const getAllApps = () => {
     return async (dispatch) => {
@@ -33,5 +33,12 @@ export const IntallApp = (appId) => {
     return async (dispatch) => {
         const payload = await InstalledAppApi(appId);
         dispatch(setInstalledApp(payload));
+    };
+};
+
+export const RateApp = (appId, score) => {
+    return async (dispatch) => {
+        const payload = await RateAppApi(appId, score);
+        dispatch(setRatedApp(payload));
     };
 };
