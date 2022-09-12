@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
-// import { appStoreApi } from "../../api/appStoreApi";
-// import { setCategories } from "../../store/category/categorySlice";
 import { getCategories } from "../../store/category/categoryThunks";
 import { CardContainer } from "./CardContainer";
+import { CardModal } from "./CardModal";
 
 
 export const IndexCard = () => {
@@ -24,9 +23,9 @@ export const IndexCard = () => {
 
   return (
     <>
-      <div className="container bg-danger mt-3">
+      <div className="container mt-3">
         <select className="col-md-12 mb-5" id="listCategories" onChange={comboSelected} style={{ height: "3rem", fontSize: '1.5rem' }} >
-        <option key={0}>Todas las categorias</option>
+        <option key={0}>Categoria</option>
           {
             CategoryList.map(({ id, name }) => (<option key={id}>{name}</option>))
           }
@@ -34,6 +33,9 @@ export const IndexCard = () => {
           <CardContainer categoryId={ categoryID }/>
 
       </div>
+
+      <CardModal/>
+
     </>
   )
 }

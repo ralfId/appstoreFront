@@ -137,9 +137,29 @@ export const InstalledAppApi = async (appId) => {
 
     
     try {
-        console.log(appId)
         const app = await appStoreApi.post(`apps/installApp/${appId}`);
 
+        if (app.status === 200) {
+            return app.data;
+        } else {
+            return {
+                data: null
+            }
+        }
+    } catch (error) {
+        return {
+            data: null
+        }
+    }
+
+}
+
+export const RateAppApi = async (appId, score) => {
+
+    
+    try {
+        const app = await appStoreApi.post(`appScore`, JSON.stringify({appId, score}));
+        
         if (app.status === 200) {
             return app.data;
         } else {

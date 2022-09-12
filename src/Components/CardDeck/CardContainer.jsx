@@ -27,7 +27,6 @@ export const CardContainer = ({ categoryId = 0 }) => {
                 }
 
             </div>
-                <CardModal/>
         </>
     )
 }
